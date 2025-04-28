@@ -12,6 +12,7 @@ import { Media } from './collections/Media'
 // if you want to use S3 or linode
 import { s3Storage } from '@payloadcms/storage-s3'
 import { resendAdapter } from '@payloadcms/email-resend'
+import { Customers } from './collections/Customers'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -28,7 +29,7 @@ export default buildConfig({
     defaultFromName: 'Admin',
     apiKey: process.env.RESEND_API_KEY || '',
   }),
-  collections: [Users, Media],
+  collections: [Users, Media, Customers],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
