@@ -45,12 +45,11 @@ const LoginClient = () => {
 
   async function onSubmit(values: z.infer<typeof signInSchema>) {
     const { email, password } = values
-    toast.success(email)
-    console.log({ values })
 
     const result = await loginUser({ email, password })
     console.log({ result })
     if (result.success) {
+      toast.success('Logged in!')
       router.push('/dashboard')
     } else {
       toast.error('Error', {

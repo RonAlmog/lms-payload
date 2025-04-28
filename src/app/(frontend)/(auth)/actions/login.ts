@@ -1,12 +1,9 @@
 'use server'
 
 import { cookies, headers as getHeaders } from 'next/headers'
-import { getPayload } from 'payload'
 import config from '@payload-config'
-import type { Payload } from 'payload'
 import { Customer } from '@/payload-types'
 import { login } from '@payloadcms/next/auth'
-
 interface LoginProps {
   email: string
   password: string
@@ -22,8 +19,6 @@ export type Result = {
   user?: Customer
 }
 export async function loginUser({ email, password }: LoginProps): Promise<LoginResponse> {
-  const payload = await getPayload({ config })
-
   try {
     const result: Result = await login({
       collection: 'customers',
@@ -46,6 +41,9 @@ export async function loginUser({ email, password }: LoginProps): Promise<LoginR
     }
   } catch (error) {
     console.log('Login error', error)
-    return { success: false, error: 'An error occured' }
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    }
   }
 }
