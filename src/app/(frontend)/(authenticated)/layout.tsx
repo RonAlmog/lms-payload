@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { getUser } from './actions/get-user'
+import Navbar from './components/navbar'
 
 export default async function Layout(props: { children: React.ReactNode }) {
   const { children } = props
@@ -10,5 +11,10 @@ export default async function Layout(props: { children: React.ReactNode }) {
     return null
   }
 
-  return <div>{children}</div>
+  return (
+    <div>
+      <Navbar />
+      {children}
+    </div>
+  )
 }

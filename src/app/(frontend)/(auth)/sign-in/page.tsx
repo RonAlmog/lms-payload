@@ -1,7 +1,7 @@
 import LoginClient from './login-client'
 
-const Login = () => {
+const SignIn = () => {
   return <LoginClient />
 }
 
-export default Login
+export default SignIn
