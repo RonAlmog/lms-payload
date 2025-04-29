@@ -13,6 +13,8 @@ import { Media } from './collections/Media'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { resendAdapter } from '@payloadcms/email-resend'
 import { Customers } from './collections/Customers'
+import { Courses } from './collections/courses/Courses'
+import { Participation } from "./collections/courses/Participation"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -29,7 +31,7 @@ export default buildConfig({
     defaultFromName: 'Admin',
     apiKey: process.env.RESEND_API_KEY || '',
   }),
-  collections: [Users, Media, Customers],
+  collections: [Users, Media, Customers, Courses, Participation],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -42,17 +44,17 @@ export default buildConfig({
   plugins: [
     payloadCloudPlugin(),
     // storage adapter settings
-    s3Storage({
-      collections: { media: true },
-      bucket: process.env.S3_BUCKET_NAME || '',
-      config: {
-        region: process.env.S3_REGION || '',
-        endpoint: process.env.S3_ENDPOINT || '',
-        credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY || '',
-          secretAccessKey: process.env.S3_SECRET_KEY || '',
-        },
-      },
-    }),
+    // s3Storage({
+    //   collections: { media: true },
+    //   bucket: process.env.S3_BUCKET_NAME || '',
+    //   config: {
+    //     region: process.env.S3_REGION || '',
+    //     endpoint: process.env.S3_ENDPOINT || '',
+    //     credentials: {
+    //       accessKeyId: process.env.S3_ACCESS_KEY || '',
+    //       secretAccessKey: process.env.S3_SECRET_KEY || '',
+    //     },
+    //   },
+    // }),
   ],
 })
