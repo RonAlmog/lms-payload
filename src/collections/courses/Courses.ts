@@ -8,9 +8,11 @@ export const Courses: CollectionConfig = {
     useAsTitle: 'title',
   },
   access: {
+    // read allowed for any authenticated user
     read: ({ req: { user } }) => {
       return Boolean(user);
     },
+    // allowed only for users (allowed in admin system), not customers
     create: ({ req: { user } }) => {
       return user?.collection === "users";
     },
