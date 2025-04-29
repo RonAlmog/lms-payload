@@ -1,4 +1,3 @@
-import { Label } from '@radix-ui/react-dropdown-menu'
 import { CollectionConfig } from 'payload'
 import { VideoBlock } from "./blocks/VideoBlock"
 import { QuizBlock } from "./blocks/QuizBlock"
@@ -7,6 +6,20 @@ export const Courses: CollectionConfig = {
   slug: 'courses',
   admin: {
     useAsTitle: 'title',
+  },
+  access: {
+    read: ({ req: { user } }) => {
+      return Boolean(user);
+    },
+    create: ({ req: { user } }) => {
+      return user?.collection === "users";
+    },
+    update: ({ req: { user } }) => {
+      return user?.collection === "users";
+    },
+    delete: ({ req: { user } }) => {
+      return user?.collection === "users";
+    }
   },
   fields: [
     {
