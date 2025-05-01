@@ -1,12 +1,13 @@
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { getUser } from '../../../actions/get-user'
-import { Course, Media } from '@/payload-types'
+import { Course, Media, Participation } from '@/payload-types'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Pencil, Video } from 'lucide-react'
 import Image from 'next/image'
 import StartCourseButton from './_components/start-course-button'
+import ResumeButton from './_components/resume-button'
 
 const CoursePage = async ({ params }: { params: { courseId: string } }) => {
   const { courseId } = await params
@@ -29,6 +30,30 @@ const CoursePage = async ({ params }: { params: { courseId: string } }) => {
 
   if (!course) {
     return notFound()
+  }
+
+  // find existing participation, if any
+  let participation: Participation | null = null
+  try {
+    const participationRes = await payload.find({
+      collection: 'participation',
+      where: {
+        course: {
+          equals: courseId,
+        },
+        customer: {
+          equals: user?.id,
+        },
+      },
+      overrideAccess: false,
+      user,
+    })
+
+    console.log({ participationRes })
+
+    participation = participationRes?.docs[0] || null
+  } catch (error) {
+    console.error(error)
   }
 
   return (
@@ -84,7 +109,13 @@ const CoursePage = async ({ params }: { params: { courseId: string } }) => {
           })}
         </div>
       </div>
-      <StartCourseButton courseId={courseId} />
+      {participation ? (
+        <div className="w-72">
+          <ResumeButton participation={participation} />
+        </div>
+      ) : (
+        <StartCourseButton courseId={courseId} />
+      )}
     </div>
   )
 }

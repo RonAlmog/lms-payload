@@ -1,3 +1,4 @@
+import { equal } from "assert";
 import { CollectionConfig } from "payload";
 
 export const Participation: CollectionConfig = {
@@ -7,7 +8,12 @@ export const Participation: CollectionConfig = {
     },
     access: {
         read: ({ req: { user } }) => {
-            return { customer: { equals: user?.id } };
+            if (user?.collection === "users") {
+                return true; // allow admins
+            } else {
+                return { customer: { equals: user?.id } }; // allow customer to see her own
+            }
+
         },
         create: ({ req: { user }, data }) => {
             console.log('*Create participation*');
