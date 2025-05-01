@@ -5,6 +5,29 @@ export const Participation: CollectionConfig = {
     admin: {
         useAsTitle: "",
     },
+    access: {
+        read: ({ req: { user } }) => {
+            return { customer: { equals: user?.id } };
+        },
+        create: ({ req: { user }, data }) => {
+            console.log('*Create participation*');
+            console.log({ user });
+            console.log({ data });
+            if (user?.collection === "users") {
+                return true;
+            } else if (user?.collection === "customers" && data?.customer === user?.id) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        update: ({ req: { user } }) => {
+            return { customer: { equals: user?.id } };
+        },
+        delete: ({ req: { user } }) => {
+            return { customer: { equals: user?.id } };
+        }
+    },
     fields: [
         {
             name: "customer",
@@ -26,4 +49,4 @@ export const Participation: CollectionConfig = {
             type: "number",
         }
     ]
-}
+};
