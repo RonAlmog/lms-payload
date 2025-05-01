@@ -1,4 +1,4 @@
-import { Participation } from '@/payload-types'
+import { Course, Participation } from '@/payload-types'
 import { getUser } from '../../../actions/get-user'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
@@ -35,5 +35,5 @@ export default async function ParticipationPage({ params }: Props) {
     return notFound()
   }
 
-  return <div>{participation.course.title}</div>
+  return <div>{(participation.course as Course).title}</div>
 }

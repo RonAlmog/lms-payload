@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Pencil, Video } from 'lucide-react'
 import Image from 'next/image'
+import StartCourseButton from './_components/start-course-button'
 
 const CoursePage = async ({ params }: { params: { courseId: string } }) => {
   const { courseId } = await params
@@ -83,6 +84,7 @@ const CoursePage = async ({ params }: { params: { courseId: string } }) => {
           })}
         </div>
       </div>
+      <StartCourseButton courseId={courseId} />
     </div>
   )
 }
