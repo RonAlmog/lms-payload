@@ -1,10 +1,11 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { getUser } from '../actions/get-user'
-import { Course, Media } from '@/payload-types'
+import { Course, Media, Participation } from '@/payload-types'
 import { Suspense } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import ResumeButton from './course/[courseId]/_components/resume-button'
 
 const Dashboard = async () => {
   const payload = await getPayload({ config: configPromise })
@@ -28,11 +29,38 @@ const Dashboard = async () => {
     console.log(e)
   }
 
+  let participations: Participation[] | null = []
+  try {
+    const participationsRes = await payload.find({
+      collection: 'participation',
+      where: {
+        customer: {
+          equals: user?.id,
+        },
+      },
+    })
+
+    participations = participationsRes.docs
+  } catch (error) {
+    console.error(error)
+  }
+
   return (
     <div className="flex flex-col mx-auto w-full max-w-4xl p-4 gap-4">
       <div className="text-xl">
         Welcome <span className="text-gray-400">{user?.email}</span>
       </div>
+
+      {participations && participations.length > 0 && (
+        <div className="text-sm text-teal-400">Your Courses</div>
+      )}
+
+      <div className="grid grid-cols-3 gap-4">
+        {participations.map((par) => (
+          <ResumeButton key={par.id} participation={par} />
+        ))}
+      </div>
+
       <div className="text-sm text-teal-400">All Courses</div>
       <div className="grid grid-cols-2 gap-4">
         <Suspense fallback={<div>Loading...</div>}>
