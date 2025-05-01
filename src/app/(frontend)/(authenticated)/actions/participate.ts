@@ -24,7 +24,7 @@ export async function participate({ courseId }: { courseId: string; }) {
                 progress: 0
             },
             overrideAccess: false,
-            user
+            user // this is critical, sending the user to the backend for verification
         });
 
         return createdParticipation;
