@@ -6,12 +6,17 @@ import { Suspense } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import ResumeButton from './course/[courseId]/_components/resume-button'
+import { redirect } from 'next/navigation'
 
 const Dashboard = async () => {
   const payload = await getPayload({ config: configPromise })
 
   // get the user
   const user = await getUser()
+  console.log({ user })
+  if (!user) {
+    redirect('/sign-in')
+  }
 
   // get courses
   let courses: Course[] = []
