@@ -2,6 +2,7 @@
 import { Course, Participation } from '@/payload-types'
 import { useState } from 'react'
 import Curriculum from './curriculum'
+import CourseModule from './course-module'
 
 interface Props {
   participation: Participation
@@ -17,6 +18,11 @@ export default function CourseViewer({ participation }: Props) {
 
   return (
     <div className="w-full flex flex-col gap-6">
+      <CourseModule
+        onCompleted={handleComplete}
+        module={course.curriculum}
+        participation={participation}
+      />
       <Curriculum course={course} currentProgress={currentProgress} />
     </div>
   )
