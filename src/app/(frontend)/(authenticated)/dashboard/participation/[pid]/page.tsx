@@ -4,6 +4,7 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { notFound } from 'next/navigation'
 import BackButton from '../../../components/back-button'
+import CourseViewer from '../../../components/course-viewer'
 
 interface Props {
   params: {
@@ -39,7 +40,8 @@ export default async function ParticipationPage({ params }: Props) {
   return (
     <div className="flex flex-col mx-auto w-full max-w-4xl p-4 gap-4">
       <BackButton />
-      {(participation.course as Course).title}
+
+      <CourseViewer participation={participation} />
     </div>
   )
 }
