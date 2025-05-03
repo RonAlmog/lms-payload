@@ -23,7 +23,7 @@ const Dashboard = async () => {
 
   try {
     // filter courses to only show courses belong to this user
-    let coursesRes = await payload.find({
+    const coursesRes = await payload.find({
       collection: 'courses',
       limit: 10,
       overrideAccess: false,

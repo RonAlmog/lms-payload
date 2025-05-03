@@ -1,23 +1,23 @@
 // storage-adapter-import-placeholder
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { buildConfig } from 'payload'
-import { fileURLToPath } from 'url'
-import sharp from 'sharp'
+import { mongooseAdapter } from '@payloadcms/db-mongodb';
+import { payloadCloudPlugin } from '@payloadcms/payload-cloud';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import path from 'path';
+import { buildConfig } from 'payload';
+import { fileURLToPath } from 'url';
+import sharp from 'sharp';
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
+import { Users } from './collections/Users';
+import { Media } from './collections/Media';
 // if you want to use S3 or linode
-import { s3Storage } from '@payloadcms/storage-s3'
-import { resendAdapter } from '@payloadcms/email-resend'
-import { Customers } from './collections/Customers'
-import { Courses } from './collections/courses/Courses'
-import { Participation } from "./collections/courses/Participation"
+// import { s3Storage } from '@payloadcms/storage-s3'
+import { resendAdapter } from '@payloadcms/email-resend';
+import { Customers } from './collections/Customers';
+import { Courses } from './collections/courses/Courses';
+import { Participation } from "./collections/courses/Participation";
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 export default buildConfig({
   admin: {
@@ -57,4 +57,4 @@ export default buildConfig({
     //   },
     // }),
   ],
-})
+});

@@ -1,4 +1,4 @@
-import { Course, Participation } from '@/payload-types'
+import { Participation } from '@/payload-types'
 import { getUser } from '../../../actions/get-user'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
