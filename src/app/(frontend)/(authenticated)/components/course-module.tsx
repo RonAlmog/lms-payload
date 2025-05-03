@@ -11,7 +11,7 @@ export default function CourseModule({ module, participation, onCompleted }: Pro
       break
 
     default:
-      return <div>unkown module type</div>
+      return <div>unknown module type {module.blockType}</div>
       break
   }
 }

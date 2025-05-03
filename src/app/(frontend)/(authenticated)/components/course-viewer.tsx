@@ -20,7 +20,7 @@ export default function CourseViewer({ participation }: Props) {
     <div className="w-full flex flex-col gap-6">
       <CourseModule
         onCompleted={handleComplete}
-        module={course.curriculum}
+        module={course.curriculum?.[currentProgress] ?? null}
         participation={participation}
       />
       <Curriculum course={course} currentProgress={currentProgress} />
