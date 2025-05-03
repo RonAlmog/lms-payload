@@ -2,6 +2,8 @@
 
 import { Participation } from '@/payload-types'
 import { useState } from 'react'
+import NextButton from './next-button'
+import { markProgress } from '../actions/mark-progress'
 
 interface VideoModuleProps {
   module: any
@@ -14,7 +16,12 @@ export default function VideoModule({ module, participation, onCompleted }: Vide
   async function handleNextModule() {
     setLoading(true)
     try {
-      // mark progress
+      const updateParticipation = await markProgress(participation)
+      if (updateParticipation && updateParticipation.progress) {
+        onCompleted(updateParticipation.progress)
+      } else {
+        console.error('Error updating progress')
+      }
     } catch (error) {
     } finally {
       setLoading(false)
@@ -40,6 +47,8 @@ export default function VideoModule({ module, participation, onCompleted }: Vide
           allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
         ></iframe>
       </div>
+
+      <NextButton loading={loading} text="Next" onClick={handleNextModule} />
     </div>
   )
 }
