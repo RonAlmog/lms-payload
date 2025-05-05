@@ -40,8 +40,8 @@ export default function QuizModule({ module, participation, onCompleted }: QuizM
     let length = module.questions[i].answers.length
 
     for (let n = 0; n < length; n++) {
-      let val = module.questions[i].answers[n].true ? module.questions[i].answers[n].true : false
-      console.log('answer', i, val, userAnswers[i][n])
+      let val = module.questions[i].answers[n].correct
+      // console.log('answer', i, val, userAnswers[i][n])
       if (val !== userAnswers[i][n]) {
         correct = false
       }
