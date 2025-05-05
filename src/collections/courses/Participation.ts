@@ -30,7 +30,12 @@ export const Participation: CollectionConfig = {
             return { customer: { equals: user?.id } };
         },
         delete: ({ req: { user } }) => {
-            return { customer: { equals: user?.id } };
+            if (user?.collection === "users") {
+                return true; // allow admins
+            } else {
+                // for customer, allow only delete her own
+                return { customer: { equals: user?.id } };
+            }
         }
     },
     fields: [

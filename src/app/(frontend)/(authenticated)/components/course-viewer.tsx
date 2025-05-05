@@ -12,6 +12,8 @@ export default function CourseViewer({ participation }: Props) {
 
   const course: Course = participation.course as Course
 
+  console.log({ course })
+
   async function handleComplete(nextIndex: number) {
     setCurrentProgress(nextIndex)
   }
