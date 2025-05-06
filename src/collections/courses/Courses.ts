@@ -48,6 +48,7 @@ export const Courses: CollectionConfig = {
       name: 'curriculum',
       label: 'Curriculum',
       type: 'blocks',
+      required: true,
       blocks: [VideoBlock, QuizBlock, FinishBlock],
     },
   ],

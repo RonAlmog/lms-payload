@@ -204,44 +204,42 @@ export interface Course {
   title: string;
   description: string;
   image: string | Media;
-  curriculum?:
-    | (
-        | {
-            title: string;
-            duration: string;
-            playerUrl: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'video';
-          }
-        | {
-            title: string;
-            questions: {
-              question: string;
-              answers?:
-                | {
-                    answer: string;
-                    correct: boolean;
-                    id?: string | null;
-                  }[]
-                | null;
-              id?: string | null;
-            }[];
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'quiz';
-          }
-        | {
-            /**
-             * The template to use for the certificate. This should be a valid HTML template
-             */
-            template: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'finish';
-          }
-      )[]
-    | null;
+  curriculum: (
+    | {
+        title: string;
+        duration: string;
+        playerUrl: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'video';
+      }
+    | {
+        title: string;
+        questions: {
+          question: string;
+          answers?:
+            | {
+                answer: string;
+                correct: boolean;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'quiz';
+      }
+    | {
+        /**
+         * The template to use for the certificate. This should be a valid HTML template
+         */
+        template: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'finish';
+      }
+  )[];
   updatedAt: string;
   createdAt: string;
 }
