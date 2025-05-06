@@ -11,7 +11,8 @@ interface Props {
 export default function ResumeButton({ participation }: Props) {
   const course: Course = participation.course as Course
   const courseLength = course.curriculum?.length || 1
-  const progress = participation.progress ?? 0
+  let progress = participation.progress ?? 0
+  progress += 1
   const progressPercentage = Math.round((progress / courseLength) * 100)
 
   return (
