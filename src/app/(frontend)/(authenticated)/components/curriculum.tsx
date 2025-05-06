@@ -1,6 +1,6 @@
 'use client'
 import { Course } from '@/payload-types'
-import { PencilIcon, VideoIcon } from 'lucide-react'
+import { FlagIcon, PencilIcon, VideoIcon } from 'lucide-react'
 
 interface Props {
   course: Course
@@ -35,9 +35,18 @@ export default function Curriculum({ course, currentProgress }: Props) {
               <div className="text-sm text-gray-400">Questions: {block.questions?.length || 0}</div>
             </div>
           )
-        } else {
-          return null
+        } else if (block.blockType === 'finish') {
+          return (
+            <div key={index} className={finalClass}>
+              <div className="text-green-400 font-semibold flex items-center gap-2">
+                <FlagIcon className="size-6" />
+                Certificate
+              </div>
+            </div>
+          )
         }
+
+        return null
       })}
     </div>
   )
